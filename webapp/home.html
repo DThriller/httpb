@@ -1,0 +1,144 @@
+<div class="header">
+    <nav class="navbar navbar-dark bg-purple">
+        <span class="navbar-brand mb-0">Hệ Tính Toán Phân Bố</span>
+        <span>
+            <button class="btn btn-outline-warning" ng-click="updateSensor()">Cập nhập cảm biến</button>
+            <button class="btn btn-outline-warning" ng-click="updateDateTime()">Cập nhập ngày giờ</button>
+
+        </span>
+    </nav>
+    <div>
+        <div class="content  mt-2 container">
+            <div class="row">
+                <div class="col-md-3 pb-2">
+                    <div class="card border border-purple">
+                        <div class="card-header text-light bg-purple">
+                            Nhiệt độ C
+                        </div>
+                        <div class="card-body">
+                            <h2>{{temp}}°C</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 pb-2">
+                    <div class="card border border-purple">
+                        <div class="card-header text-light bg-purple">
+                            Nhiệt độ F
+                        </div>
+                        <div class="card-body">
+                            <h2>{{tempF}}°F</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 pb-2">
+                    <div class="card border border-purple">
+                        <div class="card-header text-light bg-purple">
+                            Độ ẩm
+                        </div>
+                        <div class="card-body">
+                            <h2>{{humidity}}%</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 pb-2">
+                    <div class="card border border-purple">
+                        <div class="card-header text-light bg-purple">
+                            Heat Index
+                        </div>
+                        <div class="card-body">
+                            <h2>{{hic}}°C</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border mb-2 border-purple">
+                <div class="card-header text-light bg-purple">CÁC THIẾT BỊ ĐÈN</div>
+                <div class="card-body row">
+                    <div class="col-md-4 mt-2" ng-repeat="led_value in leds_status  track by $index">
+                        <div class="card">
+                            <div class="card-body row">
+                                <div class="col-md-8">
+                                    <h4 class="card-title">Đèn phòng {{$index+1}}</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Đang {{led_value ? "Bật" : "Tắt"}}.</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <input id="checkbox{{$index+1}}" type="checkbox" ng-true-value="1"
+                                            ng-false-value="0" ng-change="changeLED()" ng-model="leds_status[$index]" />
+                                        <label for="checkbox{{$index+1}}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4 mt-2" ng-repeat="lamp in lamps track by $index">
+                        <div class="card">
+                            <div class="card-body row">
+                                <div class="col-md-8">
+                                    <h4 class="card-title">Phòng ngủ {{$index+1}}</h4>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="0" max="100" value="{{lampsLight[$index]}}" class="slider" id="lampRange_{{$index}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <input id="lampSwitch_{{$index+1}}" type="checkbox" ng-true-value="1"
+                                            ng-false-value="0" ng-change="changeLED()" ng-model="lamps[$index]" />
+                                        <label for="lampSwitch_{{$index+1}}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="card border mb-2 border-purple">
+                <div class="card-header text-light bg-purple">CÁC THIẾT BỊ KHÁC</div>
+                <div class="card-body row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body row">
+                                <div class="col-md-8">
+                                    <h4 class="card-title">Cửa Garage</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Đang {{ garage_status ? "Mở" : "Đóng"}}.</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <input id="checkboxgara" type="checkbox" ng-true-value="1" ng-false-value="0"
+                                            ng-change="openGarage()" ng-model="garage_status" />
+                                        <label for="checkboxgara"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-body row">
+                                <div class="col-md-2">
+                                    <h4 class="card-title">Ghi chú</h4>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid needsclick ng-not-empty"
+                                            value="nguyen van bao" ng-model="lcd[0]" type="text">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid needsclick ng-empty"
+                                            value="" ng-model="lcd[1]" type="text">
+                                        <span class="input-group-btn"><button class="btn btn-outline-info" type="button"
+                                                ng-click="lcdPrint()">Lưu lại</button></span>
+                                        <span class="input-group-btn"><button class="btn btn-outline-danger" type="button"
+                                                ng-click="lcdClear()">Xóa</button></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border mb-2 border-purple">
+                <div class="card-header text-light bg-purple">GVHD: Lê Trung Quân</div>
+               
+            </div>
+        </div>
+    </div>
+</div>
