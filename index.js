@@ -3,7 +3,7 @@ const PORT = 5000;
 var http = require('http');
 var express = require('express');
 var socketio = require('socket.io')
-var sqlite3 = require('sqlite3').verbose();
+//var sqlite3 = require('sqlite3').verbose();
 var ip = require('ip');
 var app = express();
 
@@ -27,16 +27,16 @@ app.use(express.static("node_modules/socket.io-client"))
 app.use(express.static("node_modules/angular-socket-io"))
 app.use(express.static("webapp"))
 
-let db = new sqlite3.Database('./db/mydb.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-	if (err) {
-		return console.log(err.message);
-	}
-	db.run(`CREATE TABLE DATALOG (Id INTEGER PRIMARY KEY AUTOINCREMENT, EventName TEXT, EventJson TEXT, Date TEXT)`, (err) => {
-		if (err){
-			console.log(err.message);
-		}
-	});
-});
+// let db = new sqlite3.Database('./db/mydb.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
+// 	if (err) {
+// 		return console.log(err.message);
+// 	}
+// 	db.run(`CREATE TABLE DATALOG (Id INTEGER PRIMARY KEY AUTOINCREMENT, EventName TEXT, EventJson TEXT, Date TEXT)`, (err) => {
+// 		if (err){
+// 			console.log(err.message);
+// 		}
+// 	});
+// });
 
 function ParseJson(jsondata) {
 	try {
